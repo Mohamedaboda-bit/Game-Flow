@@ -26,16 +26,61 @@ class Player {
             x: 0,
             y: 1
         }
-        this.width = 40
-        this.height = 40
+        this.width = 70
+        this.height = 146
+        this.image = createImage(spriteStandRightPath);
+        this.frames = 0
+        this.sprites =
+        {
+            stand: {
+                right: createImage(spriteStandRightPath),
+                left: createImage(spriteStandLeftPath),
+                cropWidth: 177,
+                width: 70
+            }
+            ,
+            run: {
+                right: createImage(spriteRunRightPath),
+                left: createImage(spriteRunLeftPath),
+                cropWidth: 341,
+                width: 120
+
+            }
+        }
+        this.currentSprite = this.sprites.stand.right
+        this.currentCropWidth = 177
     }
     draw() {
-        c.fillStyle = 'blue'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(this.currentSprite,
+            this.currentCropWidth * this.frames,
+            0,
+            this.currentCropWidth,
+            400,
+            this.position.x,
+            this.position.y,
+            this.width,
+            this.height)
+
+        // c.fillStyle = 'blue'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 
 
     update() {
+        this.frames++
+        if (this.frames > 58 && (this.currentSprite === this.sprites.stand.right || this.currentSprite === this.sprites.stand.left)) {
+            this.frames = 0
+        }
+        else if (this.frames > 29 && (this.currentSprite === this.sprites.run.right|| this.currentSprite === this.sprites.run.left)) {
+            this.frames = 0
+        }
+
+        // if (this.frames > 58 && this.currentSprite === this.sprites.stand.left) {
+        //     this.frames = 0
+        // }
+        // else if (this.frames > 29 && this.currentSprite === this.sprites.run.left) {
+        //     this.frames = 0
+        // }
         this.draw();
         this.position.y += this.velocity.y;
         this.position.x += this.velocity.x;
@@ -48,7 +93,12 @@ class Player {
 const platformPath = 'img/lgPlatform.08b2286.png'; // Correct path to the image
 const backGroundPath = 'img/background.072d51b.png'
 const hillPath = 'img/hills.png'
-const hillSmallPath = 'img/hill.png'
+const hillSmallPath = 'img/platformSmallTall.png'
+
+const spriteRunRightPath = 'img/spriteRunRight.png'
+const spriteRunLeftPath = 'img/spriteRunLeft.png'
+const spriteStandRightPath = 'img/spriteStandRight.png'
+const spriteStandLeftPath = 'img/spriteStandLeft.png'
 
 
 // create function to create Image by pass the path of image 
@@ -83,6 +133,53 @@ class Platform {
     }
 }
 
+class PlatformHill {
+    constructor(x, y, image) {
+        this.position =
+        {
+            x,
+            y
+        }
+        this.image = hillSmallImage
+        // this.height=120
+        // this.width=800 
+        this.height = image.height
+        this.width = image.width
+        // alert("ss")
+
+    }
+    draw() {
+        if (this.image) {
+            c.drawImage(this.image, this.position.x, this.position.y)
+        }
+        else {
+            c.fillStyle = 'red'
+            c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        }
+    }
+}
+
+// Enemy Class (moves opposite of player)
+class Enemy {
+    constructor(x, y, width, height, speed) {
+        this.position = { x, y };
+        this.width = width;
+        this.height = height;
+        this.speed = speed;
+    }
+
+    draw() {
+        c.fillStyle = 'green';  // Color for the enemy (you can replace it with an image)
+        c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    }
+
+    update(playerVelocity) {
+        // Move opposite to the player by reversing their velocity (could add more complex logic if needed)
+        this.position.x -= playerVelocity.x * this.speed;
+        this.position.y -= playerVelocity.y * this.speed;
+    }
+}
+
 class genericObject {
     constructor(x, y, image) {
         this.position =
@@ -110,14 +207,19 @@ class genericObject {
 
 const backGroundImage = createImage(backGroundPath);
 const hillImage = createImage(hillPath);
-const hillSmallImage = createImage(hillSmallPath)
+let hillSmallImage = createImage(hillSmallPath)
 let player = new Player();
+//////////////////////////////
+let enemy = new Enemy(500, 300, 150, 150, .0);
+
 let platformImage = createImage(platformPath);
 
 // const platformImage = createImage(platformPath);
 // const platformImage = createImage(platformPath);
 let Platforms = [];
+let PlatformHills = [];
 let genericObjects = []
+let lastKey 
 
 const keys =
 {
@@ -138,38 +240,64 @@ function init() {
     // const platformImage = createImage(platformPath);
     // const platformImage = createImage(platformPath);
     Platforms = [
-        new Platform(-1, 633, platformImage),
-        new Platform((platformImage.width) *1.1 - 1, 633, platformImage),
-        new Platform((platformImage.width) *2.2-1,633, platformImage),
-        new Platform((platformImage.width*3)*3.3-1,633, platformImage),
-        // new Platform((hillSmallImage.width*3)*3.3-1,200, hillSmallImage)
+        new Platform(-70, 633, platformImage),
+        new Platform(platformImage.width * 1 + 100, 633, platformImage),
+        new Platform(platformImage.width * 2 + 300, 633, platformImage),
+        new Platform(platformImage.width * 3 + 700, 633, platformImage),
+        new Platform(platformImage.width * 4 + 100, 633, platformImage),
+        new Platform(platformImage.width * 5 + 300, 633, platformImage),
+        new Platform(platformImage.width * 6 + 700, 633, platformImage),
+
+        // new Platform((platformImage.width) *2.2-1,633, platformImage),
+        // new Platform((platformImage.width*3)*3.3-1,633, platformImage),
+        // new Platform((platformImage.width*3),110, createImage(hillSmallPath))
 
 
     ];
+    PlatformHills = [
+        new PlatformHill((platformImage.width * 3) + 10, 430, hillSmallImage),
+        new PlatformHill((platformImage.width * 6) + 10, 430, hillSmallImage),
+        new PlatformHill((platformImage.width * 7.4) + 10, 430, hillSmallImage),
+        new PlatformHill((platformImage.width * 7.5) + 10, 210, hillSmallImage)
+
+
+
+        // new PlatformHill(platformImage.width ,platformImage.width , hillSmallImage),
+
+    ]
+
     genericObjects = [
         new genericObject(-1, -1, backGroundImage),
         new genericObject(-1, 148, hillImage),
         // new genericObject(1800, 448, hillSmallImage),
 
     ]
+    // new Platform(platformImage.width *1 +100 , 633, platformImage),
 
-    
-    Target = 0; 
+
+    Target = 0;
 }
 
 function animate() {
     requestAnimationFrame(animate);
     c.fillStyle = 'white'
     c.fillRect(0, 0, canvas.width, canvas.height);
-
+    // enemy.draw()
     genericObjects.forEach(genericObjects => {
         genericObjects.draw()
     })
-
+    player.update();
+    // player.draw()
+    PlatformHills.forEach((platformHill) => {
+        platformHill.draw();
+    })
     Platforms.forEach((platform) => {
         platform.draw();
     })
-    player.update();
+
+
+
+
     // platform.draw()
 
     //player.position.x<600 =====> to disable player move out the page 
@@ -177,7 +305,7 @@ function animate() {
         player.velocity.x = 10
     }
     else
-        if (keys.left.pressed && player.position.x > 0) {
+        if ((keys.left.pressed && player.position.x > 0) || keys.left.pressed && Target === 0 && player.position.x > 0) {
             player.velocity.x = -10
 
         }
@@ -191,8 +319,11 @@ function animate() {
                 genericObjects.forEach((genericObject) => {
                     genericObject.position.x -= 2
                 })
+                PlatformHills.forEach((platformHill) => {
+                    platformHill.position.x -= 10;
+                })
             }
-            else if (keys.left.pressed) {
+            else if (keys.left.pressed && Target > 0) {
                 Platforms.forEach((platform) => {
                     platform.position.x += 10
                     Target -= 5
@@ -200,6 +331,9 @@ function animate() {
                 })
                 genericObjects.forEach((genericObject) => {
                     genericObject.position.x += 2
+                })
+                PlatformHills.forEach((platformHill) => {
+                    platformHill.position.x += 10;
                 })
 
             }
@@ -209,13 +343,56 @@ function animate() {
 
     Platforms.forEach((platform) => {
 
-
-
         if (
             player.position.y + player.height <= platform.position.y &&
             player.position.y + player.height + player.velocity.y >= platform.position.y &&
             player.position.x + player.width >= platform.position.x &&
             player.position.x <= platform.position.x + platform.width
+            // player.position.y + player.height <= PlatformHill.position.y &&
+            // player.position.y + player.height + player.velocity.y >= PlatformHill.position.y &&
+            // player.position.x + player.width >= PlatformHill.position.x &&
+            // player.position.x <= PlatformHill.position.x + PlatformHill.width 
+        ) {
+            player.velocity.y = 0;
+        }
+    })
+
+    if(keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.run.right)
+    {
+        player.frames = 1
+        player.currentSprite = player.sprites.run.right 
+        player.currentCropWidth = player.sprites.run.cropWidth
+        player.width = player.sprites.run.width
+    }
+    else if(keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.run.left)
+    {
+        player.currentSprite = player.sprites.run.left 
+        player.currentCropWidth = player.sprites.run.cropWidth
+        player.width = player.sprites.run.width
+    }
+    else if(!keys.left.pressed && lastKey === 'left' && player.currentSprite !== player.sprites.stand.left)
+    {
+        player.currentSprite = player.sprites.stand.left 
+        player.currentCropWidth = player.sprites.stand.cropWidth
+        player.width = player.sprites.stand.width
+    }
+    else if(!keys.right.pressed && lastKey === 'right' && player.currentSprite !== player.sprites.stand.right)
+    {
+        player.currentSprite = player.sprites.stand.right 
+        player.currentCropWidth = player.sprites.stand.cropWidth
+        player.width = player.sprites.stand.width
+    }
+    PlatformHills.forEach((platformHill) => {
+
+        if (
+            player.position.y + player.height <= platformHill.position.y &&
+            player.position.y + player.height + player.velocity.y >= platformHill.position.y &&
+            player.position.x + player.width >= platformHill.position.x &&
+            player.position.x <= platformHill.position.x + platformHill.width
+            // player.position.y + player.height <= PlatformHill.position.y &&
+            // player.position.y + player.height + player.velocity.y >= PlatformHill.position.y &&
+            // player.position.x + player.width >= PlatformHill.position.x &&
+            // player.position.x <= PlatformHill.position.x + PlatformHill.width 
         ) {
             player.velocity.y = 0;
         }
@@ -229,7 +406,7 @@ function animate() {
         console.log("You Win")
     }
 
-    if(player.position.y>=690)
+    if(player.position.y>=580)
     {
         init()
         // console.log("you lose")
@@ -245,7 +422,7 @@ addEventListener('keydown', function ({ keyCode }) {
     switch (keyCode) {
         case 38:
             console.log("up");
-            player.velocity.y -= 10
+            player.velocity.y -= 15
             break;
         case 40:
             console.log("down");
@@ -254,10 +431,18 @@ addEventListener('keydown', function ({ keyCode }) {
         case 39:
             console.log("right");
             keys.right.pressed = true;
+            lastKey = 'right'
+            // player.currentSprite = player.sprites.run.right
+            // player.currentCropWidth = player.sprites.run.cropWidth
+            // player.width = player.sprites.run.width
             break;
         case 37:
             console.log("left");
             keys.left.pressed = true;
+            lastKey = 'left'
+            // player.currentSprite = player.sprites.run.left
+            // player.currentCropWidth = player.sprites.run.cropWidth
+            // player.width = player.sprites.run.width
             break;
     }
 
@@ -266,7 +451,7 @@ addEventListener('keyup', function ({ keyCode }) {
     switch (keyCode) {
         case 38:
             console.log("up");
-            player.velocity.y -= 10
+            player.velocity.y -= 15
             break;
         case 40:
             console.log("down");
@@ -275,10 +460,16 @@ addEventListener('keyup', function ({ keyCode }) {
         case 39:
             console.log("right");
             keys.right.pressed = false;
+            player.currentSprite = player.sprites.stand.right
+            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.width = player.sprites.stand.width
             break;
         case 37:
             console.log("left");
             keys.left.pressed = false;
+            player.currentSprite = player.sprites.stand.left
+            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.width = player.sprites.stand.width
             break;
     }
 
