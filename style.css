@@ -1,0 +1,587 @@
+<<<<<<< HEAD
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*{ 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+    scroll-behavior: smooth;
+}
+body{
+     background-color: #000000;
+}
+
+::-webkit-scrollbar{
+width: 12px;
+}
+::-webkit-scrollbar-thumb{
+background-color: #d69142;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 7px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s;
+    z-index: 1000;
+}
+
+header.sticky {
+    background-color: #3d3d3dcf; 
+    box-shadow: 0 5px 10px rgba(255, 255, 255, 0.158);
+    position: fixed; 
+    top: 0;  
+  }
+
+.logo{
+    position:relative;
+    color: #d69142;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: 700;
+}
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header ul li{
+    list-style: none;
+    margin: 10px;
+}
+header ul li a{
+    color: #d69142;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+header ul li a:hover{
+ background: #d69142;
+ color: #050e2d;
+ box-shadow: 0 0 10px #ffffffdf;   
+}
+header .action .searchBx{
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    background: #fff;
+    border-radius: 5px;
+}
+header .action .searchBx i{
+    font-size: 1.4em;
+    margin: 5px;
+    color: #d69142;
+}
+header .action .searchBx input{
+    outline: none;
+    border: none;
+    font-size: 1em;
+    color: #222;
+}
+
+/* section 2 */
+
+.banner{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0px 100px;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+.bg{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    width: 50%;
+    height: 100%;
+}
+.content h2{
+font-size: 3em;
+color: #d69142;
+letter-spacing: 1px;
+}
+ .content p{
+    font-size: 1em;
+    color: #f9e8d4;
+    letter-spacing: 1px;
+}
+ .content a{
+    text-decoration: none;
+    display: inline-block;
+    padding:  10px 20px;
+    margin: 15px 0;
+    border: 1px solid #d69142;
+    font-weight: 700;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    color: #f9e8d4;
+}
+.content a:hover{
+    background: #d69142;
+    color: #050e2d; 
+    box-shadow: 0 0 10px #ffffffdf;   
+    border: none;
+}
+.bg img{
+ width: 600px;  
+ margin-top: 60px;
+}
+
+/* games */
+.games{padding: 0px 100px;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 40px auto;
+}
+
+.games h2{
+    color: #fff;
+    margin:10px 0;
+}
+
+.games ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.games ul li {
+    list-style: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    color: #fff;  
+}
+
+.games ul li.active{
+    background: #d69142;
+    color: #000000;
+    box-shadow: 0 0 10px #d69142;
+}
+
+.games .cardBx{
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.games .cardBx .card{
+    width: 200px;
+    border-radius: 10px;
+    margin: 20px 40px;
+    background-color: #4d4c4c;
+    overflow: hidden;
+}
+
+.card {
+    display: block;
+}
+.card.hide {
+    display: none;
+}
+
+.games .cardBx .card img{
+width: 100%;
+height: 250px;
+object-fit: cover;
+}
+.games .cardBx .card .content{
+padding: 10px;
+width: 100%;
+}
+.games .cardBx .card .content h3{
+    color: #fff;
+    margin: 10px 0;
+    
+}
+
+.games .cardBx .card .progress-line{
+    position: relative;
+    height: 10px;
+    width: 100%;
+    background-color: #000000;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: animate 1s cubic-bezier(1,0,0.5,1) forwards;
+}
+
+.games .cardBx .card .progress-line span{
+    position: absolute;
+    height: 100%;
+    width: 80%;
+    border-radius: 10px;
+    background: #d69142;
+    transform: scaleX(0);
+    box-shadow: 0 0 10px #ffffff97 ;
+    animation: animate 1s cubic-bezier(1,0,0.5,1) forwards;
+
+}
+@keyframes animate{
+    100%{
+        transform: scaleX(1);
+    }
+}
+
+.games .cardBx .card .info{
+padding: 5px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+} 
+
+.games .cardBx .card.hide{
+    display: none;
+}
+
+
+
+
+/* about */
+.about{
+    position: relative;
+    width: 100%;
+    min-height: 75vh;
+    padding: 0px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.about .contentBx{
+    width: 50%;
+    margin: 20px;
+}
+.about .contentBx h2{
+    font-size: 3em;
+    font-weight: 700;
+    color: #d69142;
+}
+.about .contentBx p{
+    max-width: 600px;
+    text-align: justify;
+    color: #f9e8d4;
+}
+
+
+/* contact */
+
+.contact{
+    padding: 20px 100px;
+    width: 100%;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact img{
+    height: 100%;
+    width: 50%;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.contact .form{
+    width: 50%;
+    margin: 30px;
+
+}
+
+.contact .form h1{
+    color: #d69142;
+}
+
+.contact .form .inputBx{
+    margin: 10px 0;
+}
+
+.contact .form .inputBx p{
+    color: #d69142;
+}
+
+.contact .form .inputBx input,
+.contact .form .inputBx textarea{
+    border: 2px solid #d69142;
+outline: none;
+height: 40px;
+padding: 10px;
+width: 100%;
+color: #000000;
+background: #f9e8d4;
+min-height: 15px;
+font-size: 1.1em;
+}
+
+.contact .form .inputBx textarea{
+    height: 100px;
+    width: 100%;
+}
+
+.contact .form .inputBx input[type="submit"]{
+    display: inline-block;
+    padding: 10px 20px;
+    outline: none;
+    background: transparent;
+    border: 2px solid #d69142;
+    background: #f9e8d4;
+    text-decoration: none;
+    font-weight: 700;
+    width: 150px;
+    border-radius: 5px;
+    color: #000000;
+    letter-spacing: 1px;
+}
+
+.contact .form .inputBx input[type="submit"]:hover{
+    background: #000000;
+    color: #d69142;
+    box-shadow: 0 0 10px #d69142;
+}
+
+/* footer */
+
+footer {
+    background-color: #1a1a1a; /* لون الخلفية أفتح قليلاً من الأسود */
+    color: #fff; /* لون النص أبيض */
+    padding: 30px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #d7a247;
+    position: relative;
+    min-height: 200px; 
+}
+
+footer .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1; 
+}
+
+footer .info i {
+    font-size: 1.8em;
+    margin-right: 15px;
+    color: #d7a247; 
+    transition: color 0.3s;
+}
+
+footer .info i:hover {
+    color: #fff; 
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center; 
+}
+
+footer ul li a {
+    color: #d7a247;
+    text-decoration: none;
+    font-size: 1.2em;
+    margin-left: 10px; 
+    transition: color 0.3s;
+}
+
+footer ul li a:hover {
+    color: #fff; 
+    text-decoration: underline;
+}
+
+footer p {
+    color: #d7a247;
+    font-size: 1.1em;
+    position: absolute;
+    bottom: 10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+
+footer p i {
+    font-size: 1.5em;
+    margin: 0 5px;
+}
+
+/* .animex{
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: all 2s ease;
+}
+
+.animex.active{
+    transform: translateY(0px);
+    opacity: 1;
+} */
+
+/* responsive */
+@media (max-width:991px)
+{
+    header{
+        padding: 15px 40px;
+    }
+    header .nav{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #000000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 1000;
+    }
+
+    header .nav.active{
+        display: flex;
+
+    }
+
+    header .nav li {
+        margin: 20px 0;
+    }
+    header .nav li a{
+        font-size: 24px;
+        margin: 10px 0;
+    }
+
+    .toggleMenu{
+        position: relative;
+        width: 30px;
+        height: 30px;
+        background: url(resources/menu.png);
+        background-position: center;
+        background-size: 30px;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .toggleMenu.active{
+        background: url(resources/close.png);
+        background-position: center;
+        background-size: 30px;
+        background-repeat: no-repeat;
+    }
+
+    .banner .bg img{
+        position: absolute;
+    }
+
+    .banner .bg .content{
+        width: 100%;
+        height: 100%;
+        background: rgpa(27 33 65 / 50%);
+        padding: 20px;
+        z-index: 1;
+        border-radius: 10px;
+    }
+
+    .about{
+        flex-direction: column;
+    }
+    .about .contentBx{
+        width: 100%;
+    }
+    .contact{
+        flex-direction: column;
+    }
+
+    .contact img{
+        width: 100%;
+        height: 100%;
+    }
+    .contact .form{
+        width: 100%;
+        margin: 30px;
+        padding: 10px;
+    }
+    .contact .form h1{
+        text-align: center;
+    }
+    footer .info{
+    flex-direction: column;}
+
+   
+=======
+body{
+    margin: 0;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+canvas {
+    display: block;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 2em;
+    text-align: center;
+}
+
+.screen button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+#gameOverScreen {
+    display: none;
+>>>>>>> e6528153147029310b42cffb8e8d4d57bbe153ea
+}

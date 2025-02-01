@@ -1,0 +1,289 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameFlow</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <a href="#" class="logo">GameFlow</a>
+      <ul class="nav">
+        <li><a href="#Home">Home</a></li>
+        <li><a href="#about">About </a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="action">
+        <div class="searchBx">
+          <a href="#"><i class="bx bx-search"></i></a>
+          <input type="text" placeholder="Search Games" />
+        </div>
+      </div>
+      <div class="toggleMenu" onclick="toggleMenu();"></div>
+    </header>
+
+    <!-- section2 -->
+    <div class="banner animex" id="Home">
+      <div class="bg">
+        <div class="content">
+          <h2>
+            One Click <br />
+            Infinite Adventures!
+          </h2>
+          <p>
+            Discover new worlds, challenge your skills, and play without limits
+          </p>
+          <!-- edit to go to register  -->
+          <a href="#" class="btn">Join Now</a>
+        </div>
+        <img src="resources/home.png"
+      </div>
+    </div>
+
+ <!-- games -->
+<div class="games animex" id="games">
+  <h2>Popular Games</h2>
+  <ul>
+    <li class="list active" data-filter="pc">Our Games</li>
+    <li class="list" data-filter="mobile">Futuristic games</li>
+  </ul>
+  <div class="cardBx">
+    <div class="card" data-item="pc">
+      <img src="resources/abdo.webp" alt="Game 1">
+      <div class="content">
+        <h3>Clash of Shadows</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="Clash of Shadows/index.html" target="_blank">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-item="pc">
+      <img src="resources/phelo.jpeg" alt="Game 2">
+      <div class="content">
+        <h3>Space Ivaders</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="Space Invaders/main.html" target="_blank">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-item="pc">
+      <img src="resources/ghada.jpeg" alt="Game 3">
+      <div class="content">
+        <h3>Tiny Friend</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="pet game/src/index.html" target="_blank">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-item="pc">
+      <img src="resources/Mohamed.jpeg" alt="Game 4">
+      <div class="content">
+        <h3>Mario</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="mario/index.html" target="_blank">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card" data-item="mobile">
+      <img src="resources/game3.jpg" alt="Game 1">
+      <div class="content">
+        <h3>Batman Arkam City</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="#">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-item="mobile">
+      <img src="resources/game4.png" alt="Game 1">
+      <div class="content">
+        <h3>Assassin's Creed Valhalla</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="#">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-item="mobile">
+      <img src="resources/game6.jpg" alt="Game 1">
+      <div class="content">
+        <h3>God of War</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="#">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-item="mobile">
+      <img src="resources/game8.jpg" alt="Game 1">
+      <div class="content">
+        <h3>Call Of Duty</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="#">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-item="mobile">
+      <img src="resources/tournament2.jpg" alt="Game 1">
+      <div class="content">
+        <h3>Shadow Fight</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="#">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-item="mobile">
+      <img src="resources/game5.jpg" alt="Game 1">
+      <div class="content">
+        <h3>Spider-Man</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="#">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-item="mobile">
+      <img src="resources/tournament4.jpg" alt="Game 1">
+      <div class="content">
+        <h3>FreeFire</h3>
+        <div class="progress-line"><span></span></div>
+        <div class="info">
+          <!-- Link the game -->
+          <a href="#">Play Now</a> 
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+    <!-- about -->
+    <div class="about animex" id="about">
+        <div class="contentBx">
+            <h2>About Us</h2>
+            <p>Welcome to GameFlow, your ultimate destination for seamless gaming adventures!<br> Whether you're a casual player or a dedicated gamer, our platform offers a world of exciting games designed to keep you in the flow of endless fun.<br><br>
+
+                At GameFlow, we believe that gaming is more than just a pastime ,it’s an experience. With one click, you’ll find yourself immersed in new worlds, challenging your skills, and embarking on infinite adventures. Our mission is simple: to provide a smooth, enjoyable, and accessible gaming experience for everyone.<br><br>
+                
+                Join us, and let your gaming journey begin. One click, infinite adventures</p>
+        </div>
+        <img src="resources/videogame.png">
+    </div>
+
+
+    <div class="contact animex" id="contact">
+      <img src="resources/contact.jpg">
+      <div class="form">
+        <h1>Contact Us</h1>
+
+        <div class="inputBx">
+          <p>Enter Name </p>
+          <input type="text" placeholder="Full Name">
+        </div>
+
+        <div class="inputBx">
+          <p>Enter Email</p>
+          <input type="text" placeholder="Full Name">
+        </div>
+
+        <div class="inputBx">
+          <p>Message</p>
+          <textarea placeholder="Type your message here"></textarea>
+        </div>
+
+        <div class="inputBx">
+          <input type="Submit" name="Submit">
+        </div>
+      </div>
+    </div>
+
+
+    <!-- footer -->
+
+    <footer>
+      <div class="info">
+        <ul>
+          <li><i class="fa-brands fa-linkedin" style="color: #d7a247;"></i><a href="https://www.linkedin.com/me?trk=p_mwlite_profile_view-secondary_nav">Felopater Adel</a></li>
+          <li><i class="fa-brands fa-linkedin" style="color: #d7a247;"></i><a href="https://www.linkedin.com/in/alya-mahmoud-0366621bb/?locale=ar_AE">Alyaa Mahmoud</a></li>
+          <li><i class="fa-brands fa-linkedin" style="color: #d7a247;"></i><a href="https://www.linkedin.com/in/mohamed3bod47000/">Mohamed Abdel-Aal</a></li>
+          <li><i class="fa-brands fa-linkedin" style="color: #d7a247;"></i><a href="https://www.linkedin.com/in/mohamed-mustafa-2372a2260?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Mohamed Mustafa</a></li>
+          <li><i class="fa-brands fa-linkedin" style="color: #d7a247;"></i><a href="https://www.linkedin.com/in/ghada-abdelhady-091b491a2?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Ghada Abdelhady</a></li>
+        </ul>
+      </div>
+      <p>Copyright <i class='bx bx-copyright'></i> 2025 GameFlow</p>
+    </footer>
+    
+    
+    
+    
+
+    <script src="script.js"></script>
+  </body>
+</html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            /* To remove the space around the window */
+            margin: 0;
+            background-color: rgb(0, 0, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        /* canvas
+        {
+            /* background-image: url(img/lgPlatform.08b2286.png); */
+    </style>
+
+</head>
+<body>
+    <canvas ></canvas>
+    <script src="script.js" ></script>
+
+</body>
+</html>
+>>>>>>> e6528153147029310b42cffb8e8d4d57bbe153ea

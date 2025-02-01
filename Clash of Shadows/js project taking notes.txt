@@ -1,0 +1,29 @@
+to do list :
+create player and enemy
+move them with evenlistenrs
+attacks 
+health bar interface
+game timers and game over
+====================================
+create player and enemy:
+you main workground will be a canves element 
+setting height to 576 and width to 1024 (16:9 ratio) will make sure the canves fitts in most of the screens
+
+use window.requestAnmationFrame() in a function (let's call it animate) to to move and swap and gravity
+user code must be oop 
+
+player object must has a postion which is x and y and a draw method that uses them to draw the player
+---------------------------------------------- 
+
+move them with evenlistenrs :
+use keydown and keyup event to detect with key was pressed
+use lastkey variable in the player object to make the players able to use mutli buttons in the same time
+use the movement if statement in the animate futnion that make any move in the game
+
+=======================================
+attacks :
+===========================================
+health bar interface :
+use div and flex and postion to hanlde drawing heath bar and timer bar
+use box-sizing : border-box   // this makes the padding not effecting the total all width of the element
+  
