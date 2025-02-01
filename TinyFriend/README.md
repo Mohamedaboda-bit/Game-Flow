@@ -1,6 +1,5 @@
 
-
-                                                                                                               ##  **Tiny Frient **
+  ##  **Tiny Frient **
 
 ### **1. Introduction:**
 The Virtual Pet Fox Game is a simulation game where you take care of a little fox. Your goal is to keep the fox happy and healthy by feeding it, cleaning up after it, and changing the weather. If you neglect the fox, it may get sick and die.
