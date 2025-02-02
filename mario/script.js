@@ -1,7 +1,9 @@
 const canvas = document.querySelector("canvas");
 const startScreen = document.getElementById('startScreen');
 const gameOverScreen = document.getElementById('gameOverScreen');
+const winScreen = document.getElementById('winScreen');
 const finalScore = document.getElementById('finalScore');
+const finalScore1 = document.getElementById('finalScore1');
 const startButton = document.getElementById('startButton');
 const restartButton = document.getElementById('restartButton');
 //2d---> to create 2d game 
@@ -16,23 +18,21 @@ const gravity = 1.5;
 //score 
 let Target = 0;
 
-startButton.addEventListener('click', () => {
-    startScreen.style.display = 'none';
-   
-    init();
-    animate(); 
-    // restart()
-});
 
-// restartButton.addEventListener('click', () => {
-//     gameOverScreen.style.display = 'none';
-//     init();
-//     animate();
-// });
-function restart(){
-    gameOverScreen.style.display = 'none';
+function start() {
+    startScreen.style.display = 'none';
+
     init();
     animate();
+}
+
+function restart() {
+    gameOverScreen.style.display = 'none';
+    winScreen.style.display = 'none';
+
+    init();
+    animate();
+    gameOverSound.pause();
 };
 
 function gameOver() {
@@ -41,7 +41,6 @@ function gameOver() {
     finalScore.textContent = score;
 }
 
-//create class Player to use object from that the class
 class Player {
     constructor() {
         this.position =
@@ -109,13 +108,19 @@ class Player {
 
         if (this.position.y + this.height + this.velocity.y <= canvas.height) {
             this.velocity.y += gravity;
-            this.isJumping = true; // player is in the air
         }
 
         else {
             this.velocity.y = 0;
+            this.isJumping = false;
 
 
+        }
+    }
+    jump() {
+        if (!this.isJumping) {
+            this.velocity.y = -25;
+            this.isJumping = true;
         }
     }
 
@@ -145,12 +150,10 @@ class Coin {
 
 }
 
-const coinImagePath = 'img/Screenshot from 2025-01-31 19-44-54.png';  // path to your coin image
+const coinImagePath = 'img/Screenshot from 2025-01-31 19-44-54.png';
 const coinImage = createImage(coinImagePath);
 
-// Add coins to the platforms
 let size = 200;
-
 
 let score = 0;  // Track the score
 
@@ -163,8 +166,8 @@ function checkCoinCollision() {
             player.position.y + player.height > coin.position.y
         ) {
             coins.splice(index, 1);
+            coinSound.play()
             score += 10;  // Add score for collecting a coin
-            // console.log("Coin collected! Score: " + score);
         }
     });
 }
@@ -173,14 +176,17 @@ const platformPath = 'img/lgPlatform.08b2286.png';
 const backGroundPath = 'img/background.072d51b.png'
 const hillPath = 'img/hills.png'
 const hillSmallPath = 'img/platformSmallTall.png'
-
 const spriteRunRightPath = 'img/spriteRunRight.png'
 const spriteRunLeftPath = 'img/spriteRunLeft.png'
 const spriteStandRightPath = 'img/spriteStandRight.png'
 const spriteStandLeftPath = 'img/spriteStandLeft.png'
 
+const startSound = new Audio('/sound/gamestart-272829.mp3');
+const jumpSound = new Audio('/sound/smb_jump-small.wav');
+const coinSound = new Audio('/sound/smb_coin.wav');
+const gameOverSound = new Audio('/sound/smb_gameover.wav');
 
-// create function to create Image by pass the path of image 
+
 function createImage(imgSrc) {
     const image = new Image();
     image.src = imgSrc
@@ -257,11 +263,10 @@ class genericObject {
     }
 }
 
+let player = new Player();
 const backGroundImage = createImage(backGroundPath);
 const hillImage = createImage(hillPath);
 let hillSmallImage = createImage(hillSmallPath)
-let player = new Player();
-
 let platformImage = createImage(platformPath);
 
 let Platforms = [];
@@ -287,6 +292,11 @@ const keys =
 
 function init() {
     player = new Player();
+
+    startSound.play();
+    score = 0
+    winScreen.style.display = 'none';
+
     platformImage = createImage(platformPath);
 
     Platforms = [
@@ -353,10 +363,9 @@ function init() {
 
     for (var i = 0; i < 50; i++) {
 
-        coins.push(new Coin(2000 + size * 6 * i, 200 + i * 10, coinImage));
+        coins.push(new Coin(2000 + size * 6 * i, 250 + i * 10, coinImage));
 
     }
-    Target = 0;
 }
 
 function animate() {
@@ -367,10 +376,9 @@ function animate() {
     genericObjects.forEach(genericObjects => {
         genericObjects.draw()
     })
+
     player.update();
-
     coins.forEach(coin => coin.draw());
-
     checkCoinCollision();
 
 
@@ -379,17 +387,13 @@ function animate() {
     c.font = '30px Arial';
     c.fillText('Score: ' + score, 20, 50);
 
-
-
-
-
     PlatformHills.forEach((platformHill) => {
         platformHill.draw();
     })
+
     Platforms.forEach((platform) => {
         platform.draw();
     })
-
 
     if (keys.right.pressed && player.position.x < 900) {
         player.velocity.x = 10
@@ -453,6 +457,8 @@ function animate() {
 
         ) {
             player.velocity.y = 0;
+            player.isJumping = false;
+
         }
 
 
@@ -489,26 +495,25 @@ function animate() {
 
         ) {
             player.velocity.y = 0;
+            player.isJumping = false;
+
         }
     })
 
-    if (Target > 2000) {
-        console.log("You Win")
+    if (score == 450) {
+
+
+        winScreen.style.display = 'block';
+        finalScore1.textContent = score;
+
     }
 
-    // if (player.position.y >= 580) {
-        
-    //     init()
-    //     gameOver()  
-    // }
     if (player.position.y + player.height >= canvas.height) {
         gameOver();
-        // init() 
+        gameOverSound.play();
     }
 }
 
-init()
-animate()
 platformImage.onerror = () => console.error('Error loading platform image');
 
 player.draw();
@@ -517,6 +522,7 @@ addEventListener('keydown', function ({ keyCode }) {
         case 38:
             console.log("up");
             player.jump();
+            jumpSound.play()
             break;
         case 40:
             console.log("down");
@@ -539,11 +545,6 @@ addEventListener('keydown', function ({ keyCode }) {
 })
 addEventListener('keyup', function ({ keyCode }) {
     switch (keyCode) {
-        case 38:
-            console.log("up");
-
-            player.velocity.y -= 22
-            break;
         case 40:
             console.log("down");
 
@@ -565,4 +566,3 @@ addEventListener('keyup', function ({ keyCode }) {
     }
 
 })
-console.log(c);

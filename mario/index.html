@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" href="img/mario.png" type="image/x-icon">
+
+    <title>Mario Game</title>
     <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
     <canvas ></canvas>
-    <div id="startScreen" class="screen">
+    <div id="startScreen" class="screen" >
         <h1>Welcome to the Mario </h1>
-        <button id="startButton">Start Game</button>
+        <button id="startButton" onclick="start()">Start Game</button>
     </div>
 
     <div id="gameOverScreen" class="screen">
         <h1>Game Over</h1>
         <p>Your Score: <span id="finalScore">0</span></p>
         <button id="restartButton" onclick="restart()">Restart Game</button>
+    </div>
+    <div id="winScreen" class="screen" style="display: none;">
+        <h1>You win</h1>
+        <p>Your Score: <span id="finalScore1">0</span></p>
+        <button id="restartButton" onclick="init()">Restart Game</button> 
     </div>
     <script src="script.js" ></script>
 
