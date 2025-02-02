@@ -10,7 +10,7 @@ const restartButton = document.getElementById('restartButton');
 const c = canvas.getContext('2d');
 
 //To make the canvas fill the screen in width and height
-canvas.width = 2424;
+canvas.width = 1724;
 canvas.height = 730;
 
 const gravity = 1.5;
@@ -181,10 +181,10 @@ const spriteRunLeftPath = 'img/spriteRunLeft.png'
 const spriteStandRightPath = 'img/spriteStandRight.png'
 const spriteStandLeftPath = 'img/spriteStandLeft.png'
 
-const startSound = new Audio('/sound/gamestart-272829.mp3');
-const jumpSound = new Audio('/sound/smb_jump-small.wav');
-const coinSound = new Audio('/sound/smb_coin.wav');
-const gameOverSound = new Audio('/sound/smb_gameover.wav');
+const startSound = new Audio('audios/gamestart-272829.mp3');
+const jumpSound = new Audio('audios/smb_jump-small.wav');
+const coinSound = new Audio('audios/smb_coin.wav');
+const gameOverSound = new Audio('audios/smb_gameover.wav');
 
 
 function createImage(imgSrc) {
