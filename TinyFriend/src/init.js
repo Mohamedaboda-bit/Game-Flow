@@ -1,14 +1,41 @@
-import {
-  SCENES,
-  RAIN_CHANCE,
-  DAY_LENGTH,
-  NIGHT_LENGTH,
-  getNextHungerTime,
-  getNextDieTime,
-  getNextPoopTime,
-} from "./constants.js";
-import { modFox, modScene, togglePoopBag, writeModal } from "./ui.js";
+// constants.js
+const ICONS = ["fish", "poop", "weather"];
+const TICK_RATE = 1000;
+const RAIN_CHANCE = 0.2;
+const SCENES = ["day", "rain"];
+const DAY_LENGTH = 60;
+const NIGHT_LENGTH = 3;
 
+const getNextHungerTime = (clock) => Math.floor(Math.random() * 3) + 5 + clock;
+const getNextDieTime = (clock) => Math.floor(Math.random() * 2) + 3 + clock;
+const getNextPoopTime = (clock) => Math.floor(Math.random() * 3) + 4 + clock;
+
+// buttons.js
+const toggleHighlighted = (iconIndex, show) => {
+  document.querySelector(`.${ICONS[iconIndex]}-icon`).classList.toggle("highlighted", show);
+};
+
+function initButtons(handleUserAction) {
+  let selectedIcon = 0;
+
+  function buttonClick({ target }) {
+    if (target.classList.contains("left-btn")) {
+      toggleHighlighted(selectedIcon, false);
+      selectedIcon = (selectedIcon + ICONS.length - 1) % ICONS.length;
+      toggleHighlighted(selectedIcon, true);
+    } else if (target.classList.contains("right-btn")) {
+      toggleHighlighted(selectedIcon, false);
+      selectedIcon = (selectedIcon + 1) % ICONS.length;
+      toggleHighlighted(selectedIcon, true);
+    } else if (target.classList.contains("middle-btn")) {
+      handleUserAction(ICONS[selectedIcon]);
+    }
+  }
+
+  document.querySelector(".buttons").addEventListener("click", buttonClick);
+}
+
+// gameState.js
 const gameState = {
   current: "INIT",
   clock: 1,
@@ -172,5 +199,35 @@ const gameState = {
   },
 };
 
-export const handleUserAction = gameState.handleUserAction.bind(gameState);
-export default gameState;
+// ui.js
+const modFox = function modFox(state) {
+  document.querySelector(".fox").className = `fox fox-${state}`;
+};
+
+const modScene = function modScene(state) {
+  document.querySelector(".game").className = `game ${state}`;
+};
+
+const togglePoopBag = function togglePoopBag(show) {
+  document.querySelector(".poop-bag").classList.toggle("hidden", !show);
+};
+
+const writeModal = function writeModal(text = "") {
+  document.querySelector(".modal").innerHTML = text
+    ? `<div class="modal-inner">${text}</div>`
+    : "";
+};
+
+// init.js
+initButtons(gameState.handleUserAction.bind(gameState));
+
+let nextTimeToTick = Date.now();
+function nextAnimationFrame() {
+  const now = Date.now();
+  if (nextTimeToTick <= now) {
+    gameState.tick();
+    nextTimeToTick = now + TICK_RATE;
+  }
+  requestAnimationFrame(nextAnimationFrame);
+}
+nextAnimationFrame();
