@@ -5,6 +5,7 @@ canves.height = 576;
 
 context.fillRect(0, 0, canves.width, canves.height);
 
+var background_sound = new Audio('./sounds/background.wav')
 
 var backGround = new sprite({
     position: {
@@ -186,16 +187,15 @@ var keys = {
     },
 }
 
-decreseTimer();
 
 function animate() {
     window.requestAnimationFrame(animate);
     context.fillStyle = "black";
     context.fillRect(0, 0, canves.width, canves.height);
     backGround.update();
-    shop.update();
-    context.fillStyle = 'rgba(255,255,255,0.07)'
-    context.fillRect(0, 0, canves.width, canves.height)
+    shop.update(); 
+    // context.fillStyle = 'rgba(255,255,255,0.07)'
+    // context.fillRect(0, 0, canves.width, canves.height)
     player.update();
     player2.update();
 
@@ -267,7 +267,7 @@ function animate() {
         }) &&
         player.isAttacking && player.currFrame === 4
     ) {
-        player2.takeHit(5);
+        player2.takeHit(1.5);
         player.isAttacking = false;
         gsap.to('#enemyHealth', {
             width: player2.health + "%"
@@ -287,7 +287,7 @@ function animate() {
         }) &&
         player2.isAttacking && player2.currFrame === 2
     ) {
-        player.takeHit(3);
+        player.takeHit(1);
         player2.isAttacking = false;
         gsap.to('#playerHealth', {
             width: player.health + "%"
@@ -305,7 +305,21 @@ function animate() {
     }
 }
 
-animate();
+var start = document.querySelector('#start')
+var game = document.querySelector('#container')
+var message = document.querySelector('#message')
+var body = document.querySelector('body')
+
+start.addEventListener('click',()=>{
+    body.style.backgroundImage = 'none';
+    game.style.display = 'inline-block';
+    message.remove();
+    background_sound.volume = 0.3
+    background_sound.loop = true;
+    background_sound.play();
+    animate();
+    decreseTimer();
+})
 
 
 // players movements

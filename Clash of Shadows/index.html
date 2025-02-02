@@ -25,6 +25,14 @@
         height: 100%;
     }
 
+    body {
+    background-image: url('./imgs/background.png');
+    background-size: 100% 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    height: 100vh;
+    }
     #container {
         width: 100%;
         height: 100%;
@@ -37,12 +45,62 @@
         height: 100%;
         display: block;
     }
-    
+    #message{
+        padding: 10px;
+        position: absolute;
+        left: 22.5vw;
+        top: 1vh;
+        height: 98vh;
+        width: 55vw;
+        background-color: #7b6891e1;
+        border: 2px solid #342624;
+        border-radius: 10px;
+    }
+    #samurai_Jack{
+        width: 100%;
+        height: 40%;
+        display: flex;
+    }
+    span{
+        display: block;
+        margin-bottom: 5%;
+    }
     </style>
 </head>
 
 <body>
-    <div id="container">
+    <div id="message">
+       <h2 style="text-align: center; padding-bottom: 1%;">clash of shadows guide</h2>
+        <h5 style="text-align: center; padding-bottom: 1%;">samurai Jack</h5>
+        <section id="samurai_Jack">
+            <img src="./imgs/jack_message.png" style="width: 40%; height: 100%;">
+            <p style="margin-top: 4%; margin-left: 15%;max-height: 100%;max-width: 50%;"> 
+                <span style="margin-bottom: 7%;">Movement Keys:</span>
+                <span> Jump : W</span>
+                <span> Move Left : A</span>
+                <span> Move Rifght : D</span>
+                <span> Attack : V</span>
+            </p>
+        </section>
+        <h5 style="text-align: center; padding-bottom: 1%;">samurai Kenji</h5>
+        <section id="samurai_Jack" style="justify-content: right;">
+            <p style="margin-top: 1%;"> 
+                <span style="margin-bottom: 7%;" >Movement Keys:</span>
+                <span> Jump : Arrow Up</span>
+                <span> Move Left : Arrow Left</span>
+                <span> Move Rifght : Arrow Right</span>
+                <span> Attack : Arrow Down</span>
+            </p>
+            <img src="./imgs/kenji_message.png" style="width: 40%; height: 100%;max-height: 70%;">
+        </section>
+        <div style="text-align: center;">
+            <button id="start" style="padding: 1%;border-radius: 5px;background-color: rgb(0, 0, 0);color: white;">
+                Start The Clash
+            </button>
+        </div>
+    </div>
+    
+    <div id="container" style="display: none;">
         <div style="position: absolute; display: flex; width: 100%;align-items: center;padding:20px;">
 
             <!-- player 1 health bar -->

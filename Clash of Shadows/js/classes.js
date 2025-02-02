@@ -89,13 +89,13 @@ class fighter extends sprite {
             this.dead = false,
             this.sounds = sounds
             this.attackSound = new Audio(this.sounds.slash)
-            this.attackSound.volume = 0.1
+            this.attackSound.volume = 0.1,
+            this.deathSound = new Audio("./sounds/death.wav")
 
         for (var sprite in this.sprites) {
             sprites[sprite].img = new Image();
             sprites[sprite].img.src = sprites[sprite].imgSrc;
         }
-        console.log(this.sprites)
     }
 
 
@@ -215,6 +215,7 @@ class fighter extends sprite {
                 }
                 break;
             case 'Death':
+                this.deathSound.play();
                 if (this.img !== this.sprites.Death.img) {
                     this.img = this.sprites.Death.img;
                     this.maxFrames = this.sprites.Death.maxFrames
