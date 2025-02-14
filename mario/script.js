@@ -10,8 +10,8 @@ const restartButton = document.getElementById('restartButton');
 const c = canvas.getContext('2d');
 
 //To make the canvas fill the screen in width and height
-canvas.width = 1224;
-canvas.height = 730;
+canvas.width = screen.width;
+canvas.height = screen.height;
 
 const gravity = 1.5;
 
