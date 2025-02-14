@@ -11,7 +11,7 @@ const c = canvas.getContext('2d');
 
 //To make the canvas fill the screen in width and height
 canvas.width = screen.width;
-canvas.height = screen.height;
+canvas.height = 730;
 
 const gravity = 1.5;
 
